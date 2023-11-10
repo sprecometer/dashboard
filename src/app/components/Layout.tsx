@@ -7,9 +7,9 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
-import { Breadcrumb, Layout, Menu, theme } from 'antd'
+import { Layout as LayoutComponent, Menu, theme } from 'antd'
 
-const { Header, Content, Footer, Sider } = Layout
+const { Header, Content, Footer, Sider } = LayoutComponent
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -39,7 +39,7 @@ const items: MenuItem[] = [
   getItem('Files', '9', <FileOutlined />),
 ]
 
-const App = ({ children }: any) => {
+const Layout = ({ children }: any) => {
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer },
@@ -64,4 +64,4 @@ const App = ({ children }: any) => {
   )
 }
 
-export default App
+export default Layout
