@@ -1,11 +1,11 @@
-"use client";
+"use client"
 import styles from './page.module.css'
-import Table from './components/Table'
+import MainBoard from './components/MainBoard'
 
 export default function Home() {
   return (
     <main className={styles.main}>
-     <Table></Table>
+      <MainBoard />
     </main>
   )
 }
