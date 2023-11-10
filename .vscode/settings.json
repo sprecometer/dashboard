@@ -1,0 +1,26 @@
+{
+    "search.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.next": true
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features",
+      "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features",
+      "editor.formatOnSave": true
+    },
+    "[scss]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "typescript.format.semicolons": "remove",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+  }
+  
