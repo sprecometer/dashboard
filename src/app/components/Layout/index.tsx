@@ -8,7 +8,6 @@ import {
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Breadcrumb, Layout, Menu, theme } from 'antd'
-import Table from '../Table'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -40,7 +39,7 @@ const items: MenuItem[] = [
   getItem('Files', '9', <FileOutlined />),
 ]
 
-const App: React.FC = () => {
+const App = ({ children }: any) => {
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer },
@@ -56,7 +55,7 @@ const App: React.FC = () => {
         <Header style={{ padding: 0, background: colorBgContainer }} />
         <div style={{ width: '100%' }}>
           <Content style={{ margin: '0 16px' }}>
-            <Table />
+            {children}
           </Content>
         </div>
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
