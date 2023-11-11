@@ -3,14 +3,14 @@ import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd'
 
 const { Option } = Select
 
-const EditDeviceDrawer = ({ onClose, open }: any) => {
+const EditDeviceDrawer = ({ onClose, open, name }: any) => {
 
 
   return (
     <>
       <Drawer
-        title='Edit device'
-        width={720}
+        title='Edit Device'
+        width={600}
         onClose={onClose}
         open={open}
         styles={{
@@ -34,8 +34,9 @@ const EditDeviceDrawer = ({ onClose, open }: any) => {
                 name="name"
                 label="Name"
                 rules={[{ required: true, message: 'Please enter a device name' }]}
+                initialValue={name}
               >
-                <Input placeholder="Please enter a device name" />
+                <Input placeholder="Please enter a device name" value={name} />
               </Form.Item>
             </Col>
             <Col span={12}>

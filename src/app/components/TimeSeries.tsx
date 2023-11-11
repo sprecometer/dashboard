@@ -2,26 +2,27 @@
 import { useCallback, useEffect, useMemo, useRef } from "react"
 
 
-function useCubismContext() {
+function useCubismContext(width: number) {
   const window = globalThis?.window || globalThis
   // @ts-ignore
   const { d3, cubism } = window
 
   const context = useMemo(() => cubism?.context()
     .step(1e4)
-    .size(800)
-    , [cubism])
+    .size(width), [cubism, width])
 
   return { d3, cubism, context }
 }
 
-export default function TimeSeries() {
+export type TimeSeriesProps = {
+  width: number
+}
+
+export default function TimeSeries({ width }: TimeSeriesProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const { d3, cubism, context } = useCubismContext()
+  const { d3, cubism, context } = useCubismContext(width)
 
   useEffect(() => {
-    // @ts-ignore
-
     // Replace this with context.graphite and graphite.metric!
     const random = (x: number) => {
       var value = 0,
@@ -46,7 +47,7 @@ export default function TimeSeries() {
       .enter().append("div")
       .attr("class", (d: string) => d + " axis")
       //@ts-ignore
-      .each(function (d: any) { d3.select(this).call(context.axis().ticks(12).orient(d)) })
+      .each(function (d: any) { d3.select(this).call(context.axis().ticks(6).orient(d)) })
 
     d3.select(containerRef.current).append("div")
       .attr("class", "rule")
@@ -58,11 +59,15 @@ export default function TimeSeries() {
       .attr("class", "horizon")
       .call(context.horizon().extent([-10, 10]))
 
-    context.on("focus", function (i: number) {
-      d3.selectAll(".value").style("right", i == null ? null : context.size() - i + "px")
-    })
-  }, [])
+    const timer = setInterval(() => {
+      d3.select(containerRef.current).selectAll(".horizon")
+        .data(d3.range(1, 2).map(random))
+    }, 500)
 
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
 
   return (
     <div>
@@ -72,16 +77,6 @@ export default function TimeSeries() {
 }
 
 export const TimeSeriesCSS = `
-body {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  margin: 30px auto;
-  position: relative;
-}
-
-header {
-  padding: 6px 0;
-}
-
 .group {
   margin-bottom: 1em;
 }
@@ -128,6 +123,11 @@ header {
   border-bottom: solid 1px #FFF;
   overflow: hidden;
   position: relative;
+  opacity: 0.3;
+}
+
+.ant-table-row:hover .horizon {
+  opacity: 1;
 }
 
 .horizon {
