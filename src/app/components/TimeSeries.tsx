@@ -8,7 +8,7 @@ function useCubismContext(width: number) {
   const { d3, cubism } = window
 
   const context = useMemo(() => cubism?.context()
-    .step(1e4)
+    .step(10)
     .size(width), [cubism, width])
 
   return { d3, cubism, context }
@@ -54,7 +54,7 @@ export default function TimeSeries({ width }: TimeSeriesProps) {
       .call(context.rule())
 
     d3.select(containerRef.current).selectAll(".horizon")
-      .data(d3.range(1, 2).map(random))
+      .data(d3.range(51, 52).map(random))
       .enter().insert("div", ".bottom")
       .attr("class", "horizon")
       .call(context.horizon().extent([-10, 10]))
@@ -155,6 +155,7 @@ export const TimeSeriesCSS = `
 
 .horizon .title {
   left: 0;
+  display: none;
 }
 
 .horizon .value {
