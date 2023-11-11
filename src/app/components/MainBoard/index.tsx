@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import type { TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
-import TimeSeries from '../TimeSeries'
+import TimeSeriesSimulation from '../TimeSeriesSimulation'
 import Location from './Location'
+import TimeSeriesGraphite from '../TimeSeriesGraphite'
 
 interface DataType {
   key: React.Key
@@ -27,7 +28,7 @@ export default function MainBoard() {
       width: '50%',
       render: () => (
         <div style={{ marginLeft: 48 }}>
-          <TimeSeries width={1000} />
+          <TimeSeriesSimulation width={1000} />
         </div>
       ),
     },
@@ -47,12 +48,12 @@ export default function MainBoard() {
       value: 1,
       status: 'OK',
     },
-    {
-      key: 1,
-      name: 'Sales Office',
-      value: 1,
-      status: 'OK',
-    },
+    // {
+    //   key: 1,
+    //   name: 'Sales Office',
+    //   value: 1,
+    //   status: 'OK',
+    // },
   ]
 
   return (

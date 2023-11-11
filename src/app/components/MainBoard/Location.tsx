@@ -1,7 +1,7 @@
 import React from 'react'
 import type { TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
-import TimeSeries from '../TimeSeries'
+import TimeSeriesSimulation from '../TimeSeriesSimulation'
 import Room from './Room'
 import Link from 'next/link'
 
@@ -33,7 +33,7 @@ export default function Location() {
       width: '50%',
       render: () => (
         <div style={{ marginLeft: 32 }}>
-          <TimeSeries width={1000} />
+          <TimeSeriesSimulation width={1000} />
         </div>
       ),
     },
