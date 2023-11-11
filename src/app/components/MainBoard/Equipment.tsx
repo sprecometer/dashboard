@@ -3,6 +3,11 @@ import type { TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeries from '../TimeSeries'
 import Device from './Device'
+import LightIcon from '../icons/LightIcon'
+import AirIcon from '../icons/AirIcon'
+import ComputerIcon from '../icons/ComputerIcon'
+import PrinterIcon from '../icons/PrinterIcon'
+import ServerIcon from '../icons/ServerIcon'
 
 interface EqiupmentDataType {
   key: React.Key
