@@ -1,34 +1,168 @@
 "use client"
-// const { Charts, ChartContainer, ChartRow, YAxis, LineChart } = require('react-timeseries-charts')
-//@ts-ignore
-import { Charts, ChartContainer, ChartRow, YAxis, LineChart } from 'react-timeseries-charts'
-import { TimeSeries as _TimeSeries, TimeRange } from "pondjs"
+import { useCallback, useEffect, useMemo, useRef } from "react"
 
-const data = {
-  name: "traffic",
-  columns: ["time", "in", "out"],
-  points: [
-    [1400425947000, 52, 41],
-    [1400425948000, 18, 45],
-    [1400425949000, 26, 49],
-    [1400425950000, 93, 81],
-  ]
+
+function useCubismContext() {
+  const window = globalThis?.window || globalThis
+  // @ts-ignore
+  const { d3, cubism } = window
+
+  const context = useMemo(() => cubism?.context()
+    .step(1e4)
+    .size(800)
+    , [cubism])
+
+  return { d3, cubism, context }
 }
-
-const series1 = new _TimeSeries(data)
-const series2 = new _TimeSeries(data)
 
 export default function TimeSeries() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { d3, cubism, context } = useCubismContext()
+
+  useEffect(() => {
+    // @ts-ignore
+
+    // Replace this with context.graphite and graphite.metric!
+    const random = (x: number) => {
+      var value = 0,
+        values: any[] = [],
+        i = 0,
+        last: any
+
+      return context.metric(function (start: number, stop: number, step: number, callback: any) {
+        start = +start, stop = +stop
+        if (isNaN(last)) last = start
+        while (last < stop) {
+          last += step
+          value = Math.max(-10, Math.min(10, value + .8 * Math.random() - .4 + .2 * Math.cos(i += x * .02)))
+          values.push(value)
+        }
+        callback(null, values = values.slice((start - stop) / step))
+      }, x)
+    }
+
+    d3.select(containerRef.current).selectAll(".axis")
+      .data(["top", "bottom"])
+      .enter().append("div")
+      .attr("class", (d: string) => d + " axis")
+      //@ts-ignore
+      .each(function (d: any) { d3.select(this).call(context.axis().ticks(12).orient(d)) })
+
+    d3.select(containerRef.current).append("div")
+      .attr("class", "rule")
+      .call(context.rule())
+
+    d3.select(containerRef.current).selectAll(".horizon")
+      .data(d3.range(1, 2).map(random))
+      .enter().insert("div", ".bottom")
+      .attr("class", "horizon")
+      .call(context.horizon().extent([-10, 10]))
+
+    context.on("focus", function (i: number) {
+      d3.selectAll(".value").style("right", i == null ? null : context.size() - i + "px")
+    })
+  }, [])
+
+
   return (
-    <ChartContainer timeRange={series1.timerange()} width={600}>
-      <ChartRow height="40">
-        {/* <YAxis id="axis1" label="AUD" min={0.5} max={1.5} width="60" type="linear" format="$,.2f" /> */}
-        <Charts>
-          <LineChart axis="axis1" series={series1} />
-          <LineChart axis="axis2" series={series2} />
-        </Charts>
-        {/* <YAxis id="axis2" label="Euro" min={0.5} max={1.5} width="80" type="linear" format="$,.2f" /> */}
-      </ChartRow>
-    </ChartContainer>
+    <div>
+      <div ref={containerRef}></div>
+    </div>
   )
 }
+
+export const TimeSeriesCSS = `
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  margin: 30px auto;
+  position: relative;
+}
+
+header {
+  padding: 6px 0;
+}
+
+.group {
+  margin-bottom: 1em;
+}
+
+.axis {
+  font: 10px sans-serif;
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  display: none;
+}
+
+.ant-table-row:hover .axis {
+  display: block;
+}
+
+.axis text {
+  -webkit-transition: fill-opacity 250ms linear;
+}
+
+.axis path {
+  display: none;
+}
+
+.axis line {
+  stroke: #FFF;
+  shape-rendering: crispEdges;
+}
+
+.axis.top {
+  top: 0px;
+  padding: 0 0 24px 0;
+  display: none !important;
+}
+
+.axis.bottom {
+  background-image: linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%);
+  background-image: -webkit-linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%);
+  bottom: 0px;
+  padding: 24px 0 0 0;
+}
+
+.horizon {
+  border-bottom: solid 1px #FFF;
+  overflow: hidden;
+  position: relative;
+}
+
+.horizon {
+  border-top: solid 1px #FFF;
+  border-bottom: solid 1px #FFF;
+}
+
+.horizon + .horizon {
+  border-top: none;
+}
+
+.horizon canvas {
+  display: block;
+}
+
+.horizon .title,
+.horizon .value {
+  bottom: 0;
+  line-height: 30px;
+  margin: 0 6px;
+  position: absolute;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  white-space: nowrap;
+}
+
+.horizon .title {
+  left: 0;
+}
+
+.horizon .value {
+  right: 0;
+}
+
+.line {
+  background: #000;
+  z-index: 2;
+}
+`
