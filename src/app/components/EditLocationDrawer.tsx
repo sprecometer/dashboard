@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd'
-import ProgressCircle from './ProgressCircle'
 
 const EditLocationDrawer = ({ onClose, open, name }: any) => {
 
@@ -57,7 +56,6 @@ const EditLocationDrawer = ({ onClose, open, name }: any) => {
             </Col>
           </Row>
         </Form>
-        <ProgressCircle />
       </Drawer>
     </>
   )
