@@ -76,6 +76,8 @@ const EditDeviceDrawer = ({ onClose, open, name }: any) => {
             </Col>
           </Row>
         </Form>
+
+
       </Drawer>
     </>
   )
