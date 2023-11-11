@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd'
 
 const { Option } = Select
 
 const EditDeviceDrawer = ({ onClose, open, name }: any) => {
-
+  const [sensorType, setSensorType] = useState(null)
 
   return (
     <>
@@ -58,17 +58,41 @@ const EditDeviceDrawer = ({ onClose, open, name }: any) => {
                 label="Sensor type"
                 rules={[{ required: true, message: 'Please select a sensor type' }]}
               >
-                <Select placeholder="Please select s sensor type">
+                <Select placeholder="Please select s sensor type" onChange={sensorType => setSensorType(sensorType)}>
                   <Option value="power">Power</Option>
                   <Option value="bistable">Bistable</Option>
                   <Option value="cpu">CPU</Option>
                 </Select>
               </Form.Item>
             </Col>
+          </Row>
+          {sensorType === 'bistable' && (
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="type"
+                  label="Min kWh"
+                  rules={[{ required: true, message: 'Please select a sensor type' }]}
+                >
+                  <Input placeholder="120kWh" value={0} type='number' />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="type"
+                  label="Max kWh"
+                  rules={[{ required: true, message: 'Please select a sensor type' }]}
+                >
+                  <Input placeholder="120kWh" value={0} type='number' />
+                </Form.Item>
+              </Col>
+            </Row>
+          )}
+          <Row>
             <Col span={12}>
               <Form.Item
                 name="ip"
-                label="IP / Device URL"
+                label="Metric / Device URI"
                 rules={[{ required: true, message: 'Please enter a device URL or IP' }]}
               >
                 <Input placeholder="Please enter a device URL or IP" />
