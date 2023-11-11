@@ -28,15 +28,16 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
+  getItem('Area Building', '1', <PieChartOutlined />),
+  getItem('Floors', '2', <PieChartOutlined />),
+  getItem('Rooms', '3', <PieChartOutlined />),
+  getItem('Equipments', '4', <PieChartOutlined />),
+  getItem('Elevators', '5', <PieChartOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
+    getItem('Tom', '6'),
+    getItem('Bill', '7'),
+    getItem('Alex', '8'),
   ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
 ]
 
 export default function AppLayout({ children }: any) {
