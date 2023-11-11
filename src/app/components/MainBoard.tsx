@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import type { Button, TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeries from './TimeSeries'
-import EditLocationDrawer from './EditLocationDrawer'
-import LightIcon from './LightIcon'
 
 interface DataType {
   key: React.Key

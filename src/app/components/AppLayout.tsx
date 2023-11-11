@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+
 import {
   PieChartOutlined,
   UserOutlined,
@@ -6,6 +8,8 @@ import {
 import type { MenuProps } from 'antd'
 import { ConfigProvider, Layout, Menu, theme } from 'antd'
 import Logo from './Logo'
+import EditLocationDrawer from './EditLocationDrawer'
+import EditDeviceDrawer from './EditDeviceDrawer'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -38,13 +42,11 @@ const items: MenuItem[] = [
   ]),
 ]
 
-const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}))
-
 export default function AppLayout({ children }: any) {
   const [collapsed, setCollapsed] = useState(false)
+  const router = useRouter()
+  const { location, device } = router.query
+
   const {
     token: { colorBgContainer },
   } = theme.useToken()
@@ -76,6 +78,8 @@ export default function AppLayout({ children }: any) {
               {children}
             </Content>
           </div>
+          {location && <EditLocationDrawer />}
+          {device && <EditDeviceDrawer />}
           <Footer style={{ textAlign: 'center' }}></Footer>
         </Layout>
       </Layout>
