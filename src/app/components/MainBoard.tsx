@@ -1,7 +1,8 @@
-import React from 'react'
-import type { TableColumnsType } from 'antd'
+import React, { useState } from 'react'
+import type { Button, TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeries from './TimeSeries'
+import AppDrawer from './EditDeviceDrawer'
 
 interface DataType {
   key: React.Key
@@ -18,6 +19,15 @@ interface ExpandedDataType {
 }
 
 export default function MainBoard() {
+  const [open, setOpen] = useState(false)
+
+  const showDrawer = () => {
+    setOpen(true)
+  }
+
+  const onClose = () => {
+    setOpen(false)
+  }
   const expandedRowRender = () => {
     const columns: TableColumnsType<ExpandedDataType> = [
       {
@@ -54,6 +64,7 @@ export default function MainBoard() {
         name: 'Lights',
         value: 0,
         status: 'OK',
+
       },
       {
         key: 1,
@@ -137,6 +148,7 @@ export default function MainBoard() {
         style={{ width: '100%' }}
         pagination={false}
       />
+      <AppDrawer open={true} onClose={() => console.log('onclose')} device='lights' />
     </>
   )
 }
