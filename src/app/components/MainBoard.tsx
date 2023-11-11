@@ -3,6 +3,7 @@ import type { Button, TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeries from './TimeSeries'
 import EditLocationDrawer from './EditLocationDrawer'
+import LightIcon from './LightIcon'
 
 interface DataType {
   key: React.Key
@@ -64,7 +65,6 @@ export default function MainBoard() {
         name: 'Lights',
         value: 0,
         status: 'OK',
-
       },
       {
         key: 1,
@@ -148,7 +148,7 @@ export default function MainBoard() {
         style={{ width: '100%' }}
         pagination={false}
       />
-      <EditLocationDrawer open={true} onClose={() => console.log('onclose')} device='lights' />
+
     </>
   )
 }
