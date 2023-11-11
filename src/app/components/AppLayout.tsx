@@ -73,8 +73,11 @@ export default function AppLayout({ children }: any) {
         </Sider>
         <Layout>
           <Header style={{ display: 'flex', alignItems: 'center', height: '80px', backgroundColor: '#171123', padding: '0' }}>
+            <span style={{
+              fontFamily: 'Electrolize, sans-serif', fontSize: '32px', color: '#20FC8F', marginLeft: '-51px',
+              zIndex: 999
+            }}>Sprecometer</span>
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ backgroundColor: '#171123' }}>
-              <span style={{ fontFamily: 'Electrolize, sans-serif', fontSize: '32px', color: '#20FC8F' }}>Sprecometer</span>
               {/* <div style={{ fontFamily: 'Electrolize, sans-serif', fontSize: '20px', color: '#20FC8F', marginLeft: '15px', paddingLeft: '15px', borderLeft: '1px solid #20FC8F' }}>Office Manager</div> */}
             </Menu>
           </Header>

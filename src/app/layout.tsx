@@ -26,6 +26,9 @@ export default function RootLayout({
           // .ant-spin-nested-loading {
           //   padding: 16px 0;
           // }
+          .ant-menu-root {
+            margin-top: 82px!important;
+          }
           .ant-layout-content {
             margin: 0 !important;
           }
