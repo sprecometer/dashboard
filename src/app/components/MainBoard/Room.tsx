@@ -49,19 +49,19 @@ export default function Room() {
   const data: RoomDataType[] = [
     {
       key: 0,
-      name: 'Room 1',
+      name: 'Seminar Room 1',
       value: 0,
       status: 'OK',
     },
     {
       key: 1,
-      name: 'Room 2',
+      name: 'Seminar Room 2',
       value: 0,
       status: 'OK',
     },
     {
       key: 1,
-      name: 'Room 3',
+      name: 'Seminar Room 3',
       value: 0,
       status: 'OK',
     },

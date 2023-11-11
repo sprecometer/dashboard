@@ -59,19 +59,19 @@ export default function Equipment() {
       status: 'OK',
     },
     {
-      key: 1,
+      key: 2,
       name: 'Printers',
       value: 0,
       status: 'OK',
     },
     {
-      key: 1,
+      key: 3,
       name: 'PCs / Laptops',
       value: 0,
       status: 'OK',
     },
     {
-      key: 1,
+      key: 4,
       name: 'Servers',
       value: 0,
       status: 'OK',
