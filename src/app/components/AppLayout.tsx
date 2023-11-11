@@ -59,7 +59,7 @@ export default function AppLayout({ children }: any) {
       }}
     >
       <Layout style={{ minHeight: '100vh', background: 'rgba(52, 57, 91, 0.60)' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={{ backgroundColor: '#171123 !important' }} >
+        <Sider collapsible collapsed={true} onCollapse={(value) => setCollapsed(value)} style={{ backgroundColor: '#171123 !important' }} >
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} style={{ backgroundColor: '#171123' }} />
         </Sider>
         <Layout>
@@ -67,7 +67,6 @@ export default function AppLayout({ children }: any) {
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ backgroundColor: '#171123' }}>
               <Logo /><span style={{ fontFamily: 'Electrolize, sans-serif', fontSize: '40px', color: '#20FC8F', marginLeft: '20px' }}>Sprecometer</span>
               <div style={{ fontFamily: 'Electrolize, sans-serif', fontSize: '20px', color: '#20FC8F', marginLeft: '15px', paddingLeft: '15px', borderLeft: '1px solid #20FC8F' }}>Office Manager</div>
-
             </Menu>
           </Header>
 
