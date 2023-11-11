@@ -7,39 +7,27 @@ function useCubismContext(width: number) {
   // @ts-ignore
   const { d3, cubism } = window
 
-  const context = useMemo(() => cubism?.context()
+  const context = cubism?.context()
     .step(10)
-    .size(width), [cubism, width])
+    .size(width)
+  const graphite = context?.graphite("http://localhost:3002")
 
-  return { d3, cubism, context }
+  return { d3, cubism, context, graphite }
 }
 
-export type TimeSeriesProps = {
+export type TimeSeriesGraphiteProps = {
   width: number
 }
 
-export default function TimeSeries({ width }: TimeSeriesProps) {
+export default function TimeSeriesGraphite({ width }: TimeSeriesGraphiteProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const { d3, cubism, context } = useCubismContext(width)
+  const { d3, cubism, context, graphite } = useCubismContext(width)
 
   useEffect(() => {
     // Replace this with context.graphite and graphite.metric!
-    const random = (x: number) => {
-      var value = 0,
-        values: any[] = [],
-        i = 0,
-        last: any
-
-      return context.metric(function (start: number, stop: number, step: number, callback: any) {
-        start = +start, stop = +stop
-        if (isNaN(last)) last = start
-        while (last < stop) {
-          last += step
-          value = Math.max(-10, Math.min(10, value + .8 * Math.random() - .4 + .2 * Math.cos(i += x * .02)))
-          values.push(value)
-        }
-        callback(null, values = values.slice((start - stop) / step))
-      }, x)
+    const power = (x: number) => {
+      // return graphite.metric("sumSeries(nonNegativeDerivative(exclude(sprecometer.demo.building.0.entrance.chandelier,'idle')))")
+      return graphite.metric(`sprecometer.demo.building.0.entrance.chandelier`, 'from=-50min')
     }
 
     d3.select(containerRef.current).selectAll(".axis")
@@ -54,19 +42,11 @@ export default function TimeSeries({ width }: TimeSeriesProps) {
       .call(context.rule())
 
     d3.select(containerRef.current).selectAll(".horizon")
-      .data(d3.range(51, 52).map(random))
+      .data(d3.range(51, 52).map(power))
       .enter().insert("div", ".bottom")
       .attr("class", "horizon")
-      .call(context.horizon().extent([-10, 10]))
-
-    const timer = setInterval(() => {
-      d3.select(containerRef.current).selectAll(".horizon")
-        .data(d3.range(1, 2).map(random))
-    }, 500)
-
-    return () => {
-      clearInterval(timer)
-    }
+      // .call(context.horizon().extent([-40, 40]))
+      .call(context.horizon().metric(graphite.metric).height(30))
   }, [])
 
   return (

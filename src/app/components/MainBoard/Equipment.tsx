@@ -1,7 +1,7 @@
 import React from 'react'
 import type { TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
-import TimeSeries from '../TimeSeries'
+import TimeSeriesSimulation from '../TimeSeriesSimulation'
 import Device from './Device'
 
 interface EqiupmentDataType {
@@ -27,7 +27,7 @@ export default function Equipment() {
       width: '50%',
       render: () => (
         <div style={{ marginLeft: 0 }}>
-          <TimeSeries width={1000} />
+          <TimeSeriesSimulation width={1000} />
         </div>
       ),
     },
