@@ -2,8 +2,9 @@ import React from 'react'
 import type { TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeries from '../TimeSeries'
+import Link from 'next/link'
 
-interface EqiupmentDataType {
+interface DeviceDataType {
   key: React.Key
   name: string
   value: number
@@ -11,13 +12,18 @@ interface EqiupmentDataType {
 }
 
 export default function Device() {
-  const columns: TableColumnsType<EqiupmentDataType> = [
+  const columns: TableColumnsType<DeviceDataType> = [
     {
       title: 'Device',
       dataIndex: 'name',
       key: 'name',
       width: 'calc(350px)',
       fixed: 'left',
+      render: (value: string, rowData: DeviceDataType) => (
+        <Link href={`/?deviceId=${value}`}>
+          {value}
+        </Link>
+      ),
     },
     {
       title: '',
@@ -39,7 +45,7 @@ export default function Device() {
     },
   ]
 
-  const data: EqiupmentDataType[] = [
+  const data: DeviceDataType[] = [
     {
       key: 0,
       name: 'Device 1',

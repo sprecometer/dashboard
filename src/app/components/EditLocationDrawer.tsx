@@ -1,14 +1,13 @@
 import React from 'react'
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd'
 
-const EditLocationDrawer = ({ onClose, open }: any) => {
-
+const EditLocationDrawer = ({ onClose, open, name }: any) => {
 
   return (
     <>
       <Drawer
-        title='Edit device'
-        width={720}
+        title='Edit Location'
+        width={600}
         onClose={onClose}
         open={open}
         styles={{
@@ -32,8 +31,9 @@ const EditLocationDrawer = ({ onClose, open }: any) => {
                 name="name"
                 label="Name"
                 rules={[{ required: true, message: 'Please enter a device name' }]}
+                initialValue={name}
               >
-                <Input placeholder="Please enter a device name" />
+                <Input placeholder="Please enter a device name" value={name} />
               </Form.Item>
             </Col>
             <Col span={24}>

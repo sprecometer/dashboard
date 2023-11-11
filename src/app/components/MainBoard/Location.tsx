@@ -3,6 +3,7 @@ import type { TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeries from '../TimeSeries'
 import Room from './Room'
+import Link from 'next/link'
 
 interface LocationDataType {
   key: React.Key
@@ -19,6 +20,11 @@ export default function Location() {
       key: 'name',
       width: 'calc(350px + 3 * 16px)',
       fixed: 'left',
+      render: (value: string, rowData: LocationDataType) => (
+        <Link href={`/?locationId=${value}`}>
+          {value}
+        </Link>
+      ),
     },
     {
       title: '',

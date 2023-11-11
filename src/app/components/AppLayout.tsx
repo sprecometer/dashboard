@@ -6,6 +6,10 @@ import {
 import type { MenuProps } from 'antd'
 import { ConfigProvider, Layout, Menu, theme } from 'antd'
 import Logo from './Logo'
+import EditDeviceDrawer from './EditDeviceDrawer'
+import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+import EditLocationDrawer from './EditLocationDrawer'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -44,6 +48,12 @@ const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
 }))
 
 export default function AppLayout({ children }: any) {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const locationId = searchParams.get('locationId')
+  const roomId = searchParams.get('roomId')
+  const deviceId = searchParams.get('deviceId')
+
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer },
@@ -77,6 +87,9 @@ export default function AppLayout({ children }: any) {
           </div>
           <Footer style={{ textAlign: 'center' }}></Footer>
         </Layout>
+        <EditLocationDrawer open={locationId} onClose={() => router.push('/')} name={locationId} />
+        <EditLocationDrawer open={roomId} onClose={() => router.push('/')} name={roomId} />
+        <EditDeviceDrawer open={deviceId} onClose={() => router.push('/')} name={deviceId} />
       </Layout>
     </ConfigProvider>
   )
