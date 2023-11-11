@@ -1,7 +1,9 @@
-import React from 'react'
-import type { TableColumnsType } from 'antd'
+import React, { useState } from 'react'
+import type { Button, TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeries from './TimeSeries'
+import EditLocationDrawer from './EditLocationDrawer'
+import LightIcon from './LightIcon'
 
 interface DataType {
   key: React.Key
@@ -18,6 +20,15 @@ interface ExpandedDataType {
 }
 
 export default function MainBoard() {
+  const [open, setOpen] = useState(false)
+
+  const showDrawer = () => {
+    setOpen(true)
+  }
+
+  const onClose = () => {
+    setOpen(false)
+  }
   const expandedRowRender = () => {
     const columns: TableColumnsType<ExpandedDataType> = [
       {
@@ -137,6 +148,7 @@ export default function MainBoard() {
         style={{ width: '100%' }}
         pagination={false}
       />
+
     </>
   )
 }
