@@ -1,5 +1,5 @@
 "use client"
-import { useCallback, useEffect, useMemo, useRef } from "react"
+import { useEffect, useMemo, useRef } from "react"
 
 
 function useCubismContext(width: number) {
@@ -8,7 +8,8 @@ function useCubismContext(width: number) {
   const { d3, cubism } = window
 
   const context = useMemo(() => cubism?.context()
-    .step(10)
+    .serverDelay(100)
+    .step(100)
     .size(width), [cubism, width])
 
   return { d3, cubism, context }

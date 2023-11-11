@@ -8,7 +8,8 @@ function useCubismContext(width: number) {
   const { d3, cubism } = window
 
   const context = cubism?.context()
-    .step(10)
+    .serverDelay(100)
+    .step(100)
     .size(width)
   const graphite = context?.graphite("http://localhost:3002")
 
@@ -17,17 +18,17 @@ function useCubismContext(width: number) {
 
 export type TimeSeriesGraphiteProps = {
   width: number
+  inputMetric: string
 }
 
-export default function TimeSeriesGraphite({ width }: TimeSeriesGraphiteProps) {
+export default function TimeSeriesGraphite({ width, inputMetric }: TimeSeriesGraphiteProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { d3, cubism, context, graphite } = useCubismContext(width)
 
   useEffect(() => {
     // Replace this with context.graphite and graphite.metric!
     const power = (x: number) => {
-      // return graphite.metric("sumSeries(nonNegativeDerivative(exclude(sprecometer.demo.building.0.entrance.chandelier,'idle')))")
-      return graphite.metric(`sprecometer.demo.building.0.entrance.chandelier`, 'from=-50min')
+      return graphite.metric(inputMetric)
     }
 
     d3.select(containerRef.current).selectAll(".axis")

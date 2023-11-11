@@ -28,8 +28,7 @@ export default function MainBoard() {
       width: '50%',
       render: () => (
         <div style={{ marginLeft: 48 }}>
-          {/* <TimeSeriesSimulation width={1000} /> */}
-          <TimeSeriesGraphite width={1000} />
+          <TimeSeriesSimulation width={1000} />
         </div>
       ),
     },

@@ -3,12 +3,14 @@ import type { TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeriesSimulation from '../TimeSeriesSimulation'
 import Link from 'next/link'
+import TimeSeriesGraphite from '../TimeSeriesGraphite'
 
 interface DeviceDataType {
   key: React.Key
   name: string
   value: number
   status: string
+  inputMetric: string
 }
 
 export default function Device() {
@@ -30,18 +32,19 @@ export default function Device() {
       dataIndex: 'series',
       key: 'series',
       width: '50%',
-      render: () => (
-        <div style={{ marginLeft: 0 }}>
-          <TimeSeriesSimulation width={1000} />
+      render: (value: string, rowData: DeviceDataType) => {
+        console.log(rowData.inputMetric)
+        return <div style={{ marginLeft: 0 }}>
+          <TimeSeriesGraphite width={1000} inputMetric={rowData.inputMetric} />
         </div>
-      ),
+      },
     },
     {
       title: 'Status',
       key: 'status',
       width: '60px',
       // fixed: "right",
-      render: () => <Badge status="success" text="OK" style={{ width: 100 }} />,
+      render: () => <Badge status="error" text="MISSING" style={{ width: 100 }} />,
     },
   ]
 
@@ -51,12 +54,14 @@ export default function Device() {
       name: 'Device 1',
       value: 0,
       status: 'OK',
+      inputMetric: 'sprecometer.demo.building.0.entrance.reception', // Power Shelly
     },
     {
       key: 1,
       name: 'Device 2',
       value: 0,
       status: 'OK',
+      inputMetric: 'sprecometer.demo.building.0.entrance.chandelier', // Windows CPU daemon
     },
   ]
 
