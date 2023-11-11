@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import {
-  PieChartOutlined,
+  DatabaseOutlined,
   UserOutlined,
+  WalletOutlined
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { ConfigProvider, Layout, Menu, theme } from 'antd'
@@ -30,11 +31,9 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Area Building', '1', <PieChartOutlined />),
-  getItem('Floors', '2', <PieChartOutlined />),
-  getItem('Rooms', '3', <PieChartOutlined />),
-  getItem('Equipments', '4', <PieChartOutlined />),
-  getItem('Elevators', '5', <PieChartOutlined />),
+  // getItem('Area Building', '1', <PieChartOutlined />),
+  getItem('Floors', '2', <DatabaseOutlined />),
+  getItem('Rooms', '3', <WalletOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
     getItem('Tom', '6'),
     getItem('Bill', '7'),
@@ -68,15 +67,15 @@ export default function AppLayout({ children }: any) {
         },
       }}
     >
-      <Layout style={{ minHeight: '100vh', background: 'rgba(52, 57, 91, 0.60)' }}>
+      <Layout style={{ minHeight: '100vh', background: '#171123 ' }}>
         <Sider collapsible collapsed={true} onCollapse={(value) => setCollapsed(value)} style={{ backgroundColor: '#171123 !important' }} >
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} style={{ backgroundColor: '#171123' }} />
+          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} style={{ backgroundColor: '#171123', marginTop: '60px' }} />
         </Sider>
         <Layout>
-          <Header style={{ display: 'flex', alignItems: 'center', height: '100px', backgroundColor: '#171123' }}>
+          <Header style={{ display: 'flex', alignItems: 'center', height: '80px', backgroundColor: '#171123 ' }}>
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ backgroundColor: '#171123' }}>
-              <Logo /><span style={{ fontFamily: 'Electrolize, sans-serif', fontSize: '40px', color: '#20FC8F', marginLeft: '20px' }}>Sprecometer</span>
-              <div style={{ fontFamily: 'Electrolize, sans-serif', fontSize: '20px', color: '#20FC8F', marginLeft: '15px', paddingLeft: '15px', borderLeft: '1px solid #20FC8F' }}>Office Manager</div>
+              <span style={{ fontFamily: 'Electrolize, sans-serif', fontSize: '32px', color: '#20FC8F' }}>Sprecometer</span>
+              {/* <div style={{ fontFamily: 'Electrolize, sans-serif', fontSize: '20px', color: '#20FC8F', marginLeft: '15px', paddingLeft: '15px', borderLeft: '1px solid #20FC8F' }}>Office Manager</div> */}
             </Menu>
           </Header>
 
