@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import type { Button, TableColumnsType } from 'antd'
 import { Badge, Table } from 'antd'
 import TimeSeries from './TimeSeries'
-import AppDrawer from './EditDeviceDrawer'
+import EditLocationDrawer from './EditLocationDrawer'
 
 interface DataType {
   key: React.Key
@@ -148,7 +148,7 @@ export default function MainBoard() {
         style={{ width: '100%' }}
         pagination={false}
       />
-      <AppDrawer open={true} onClose={() => console.log('onclose')} device='lights' />
+      <EditLocationDrawer open={true} onClose={() => console.log('onclose')} device='lights' />
     </>
   )
 }

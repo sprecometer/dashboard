@@ -3,7 +3,7 @@ import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd'
 
 const { Option } = Select
 
-const AppDrawer = ({ onClose, open }: any) => {
+const EditDeviceDrawer = ({ onClose, open }: any) => {
 
 
   return (
@@ -80,4 +80,4 @@ const AppDrawer = ({ onClose, open }: any) => {
   )
 }
 
-export default AppDrawer
+export default EditDeviceDrawer
