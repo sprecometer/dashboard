@@ -8,8 +8,8 @@ function useCubismContext(width: number) {
   const { d3, cubism } = window
 
   const context = cubism?.context()
-    .serverDelay(100)
-    .step(100)
+    // .serverDelay(500)
+    // .step(50)
     .size(width)
   const graphite = context?.graphite("http://localhost:3002")
 

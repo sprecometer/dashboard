@@ -44,7 +44,7 @@ export default function Device() {
       key: 'status',
       width: '60px',
       // fixed: "right",
-      render: () => <Badge status="error" text="MISSING" style={{ width: 100 }} />,
+      render: () => <Badge status="error" text="ERROR" style={{ width: 100 }} />,
     },
   ]
 
@@ -54,14 +54,14 @@ export default function Device() {
       name: 'Device 1',
       value: 0,
       status: 'OK',
-      inputMetric: 'sprecometer.demo.building.0.entrance.reception', // Power Shelly
+      inputMetric: 'scale(sprecometer.demo.building.0.entrance.reception,0.5)', // Power Shelly
     },
     {
       key: 1,
       name: 'Device 2',
       value: 0,
       status: 'OK',
-      inputMetric: 'sprecometer.demo.building.0.entrance.chandelier', // Windows CPU daemon
+      inputMetric: 'scale(offset(sprecometer.demo.building.0.entrance.chandelier,0),1000)', // Windows CPU daemon
     },
   ]
 

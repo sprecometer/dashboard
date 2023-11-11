@@ -44,7 +44,7 @@ export default function MainBoard() {
   const data: DataType[] = [
     {
       key: 0,
-      name: 'Headquartes',
+      name: 'NOI Techpark',
       value: 1,
       status: 'OK',
     },

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Drawer, Form, Input, Row, Select, Space } from 'antd'
 
 const { Option } = Select
 
 const EditDeviceDrawer = ({ onClose, open, name }: any) => {
-  const [sensorType, setSensorType] = useState(null)
+  const [sensorType, setSensorType] = useState<string>()
 
   return (
     <>
@@ -45,10 +45,11 @@ const EditDeviceDrawer = ({ onClose, open, name }: any) => {
                 label="Device type"
                 rules={[{ required: true, message: 'Please select a device type' }]}
               >
-                <Select placeholder="Please select a device type">
+                <Select placeholder="Please select a device type" >
                   <Option value="light">Light</Option>
                   <Option value="printer">Printer</Option>
                   <Option value="computer">Computer</Option>
+                  <Option value="elevator">Elevator</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -57,6 +58,7 @@ const EditDeviceDrawer = ({ onClose, open, name }: any) => {
                 name="type"
                 label="Sensor type"
                 rules={[{ required: true, message: 'Please select a sensor type' }]}
+                initialValue={sensorType}
               >
                 <Select placeholder="Please select s sensor type" onChange={sensorType => setSensorType(sensorType)}>
                   <Option value="power">Power</Option>
