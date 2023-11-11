@@ -33,7 +33,7 @@ export default function Location() {
       width: '50%',
       render: () => (
         <div style={{ marginLeft: 32 }}>
-          <TimeSeries width={800} />
+          <TimeSeries width={1000} />
         </div>
       ),
     },
@@ -42,7 +42,7 @@ export default function Location() {
       key: 'status',
       width: '60px',
       // fixed: "right",
-      render: () => <Badge status="success" text="OK" />,
+      render: () => <Badge status="success" text="OK" style={{ width: 100 }} />,
     },
   ]
 

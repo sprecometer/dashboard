@@ -26,7 +26,10 @@ export default function RootLayout({
           // .ant-spin-nested-loading {
           //   padding: 16px 0;
           // }
-`}
+          .ant-layout-content {
+            margin: 0 !important;
+          }
+        `}
         </style>
         <script src="//d3js.org/d3.v2.min.js" charSet="utf-8"></script>
         <script src="https://square.github.io/cubism/cubism.v1.min.js"></script>
